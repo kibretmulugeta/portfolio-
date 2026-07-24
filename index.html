@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kibret Mulugeta | AI Engineer • Computer Engineer • AI/ML Researcher</title>
+  <meta name="description" content="Flagship personal identity website, medical AI research hub, and interactive telemetry dashboard for Kibret Mulugeta. MSc in Computer Engineering (AI & Data Engineering, Bahir Dar University).">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'bg-dark': '#090A0F',
+            'surface-dark': '#12141D',
+            'surface-hover': '#1A1D2B',
+            'accent-cyan': '#38BDF8',
+            'accent-indigo': '#6366F1',
+            'accent-emerald': '#10B981',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #090A0F;
+      color: #F4F4F5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .glass-panel {
+      background: rgba(18, 20, 29, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .cyan-gradient-text {
+      background: linear-gradient(135deg, #38BDF8 0%, #6366F1 50%, #A855F7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090A0F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272A;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-zinc-800/80 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+    <a href="#home" onclick="navigate('home')" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 p-[1px] shadow-lg shadow-cyan-500/20">
+        <div class="w-full h-full bg-[#090A0F] rounded-[7px] flex items-center justify-center">
+          <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i>
+        </div>
+      </div>
+      <div>
+        <span class="text-base font-bold text-white group-hover:text-cyan-400 transition-colors">Kibret Mulugeta</span>
+        <div class="flex items-center gap-1.5 text-[11px] font-mono text-zinc-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block"></span>
+          <span>AI & Computer Engineer</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden md:flex items-center gap-1 bg-zinc-900/80 p-1.5 rounded-full border border-zinc-800">
+      <button onclick="navigate('home')" id="nav-home" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-cyan-400 bg-cyan-500/15 border border-cyan-500/30">Home</button>
+      <button onclick="navigate('work')" id="nav-work" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white">Work</button>
+      <button onclick="navigate('research')" id="nav-research" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white">Research</button>
+      <button onclick="navigate('dashboard')" id="nav-dashboard" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white">Dashboard</button>
+      <button onclick="navigate('about')" id="nav-about" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white">About</button>
+      <button onclick="navigate('resume')" id="nav-resume" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white">Resume</button>
+      <button onclick="navigate('contact')" id="nav-contact" class="nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white">Contact</button>
+    </nav>
+
+    <!-- Telemetry Pill CTA -->
+    <div class="flex items-center gap-3">
+      <button onclick="navigate('dashboard')" class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-800/60 text-xs font-mono transition-all">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <span>Owner Control Center</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+  <main id="app-container" class="flex-grow">
+    <!-- View Content Injected via JS -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-zinc-800/80 bg-[#07080B] py-12 px-4 sm:px-8 mt-20">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-zinc-800/60">
+      <div class="md:col-span-2 space-y-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i>
+          <span class="text-lg font-bold text-white">Kibret Mulugeta</span>
+        </div>
+        <p class="text-xs text-zinc-400 max-w-md leading-relaxed">
+          Bridging neuro-inspired artificial intelligence, medical computer vision, and high-performance full-stack engineering.
+        </p>
+        <div class="flex items-center gap-3 pt-2">
+          <a href="https://github.com" target="_blank" class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white"><i data-lucide="github" class="w-4 h-4"></i></a>
+          <a href="https://linkedin.com" target="_blank" class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          <a href="mailto:kibretmail@gmail.com" class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white"><i data-lucide="mail" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+
+      <div class="space-y-2 text-xs text-zinc-400">
+        <h4 class="font-mono uppercase font-bold text-zinc-300">Navigation</h4>
+        <ul class="space-y-1.5">
+          <li><a href="#work" onclick="navigate('work')" class="hover:text-cyan-400">Portfolio & Work</a></li>
+          <li><a href="#research" onclick="navigate('research')" class="hover:text-cyan-400">Medical AI Research</a></li>
+          <li><a href="#dashboard" onclick="navigate('dashboard')" class="hover:text-cyan-400">Telemetry Dashboard</a></li>
+          <li><a href="#about" onclick="navigate('about')" class="hover:text-cyan-400">About & Trajectory</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-2 text-xs text-zinc-400">
+        <h4 class="font-mono uppercase font-bold text-zinc-300">Academic Background</h4>
+        <p class="text-zinc-200 font-semibold">MSc Computer Engineering</p>
+        <p class="text-zinc-500">Bahir Dar University (AI & Data Eng)</p>
+        <p class="text-zinc-200 font-semibold pt-1">BSc Electrical & Computer Eng</p>
+        <p class="text-zinc-500">Debre Berhan University</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono">
+      <p>© 2026 Kibret Mulugeta. All rights reserved.</p>
+      <p>Direct Email: <a href="mailto:kibretmail@gmail.com" class="text-cyan-400 underline">kibretmail@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: APPLICATION STATE & CONTROLLER -->
+  <script type="module">
+    import { profile } from './src/data/profile.js';
+    import { projects } from './src/data/projects.js';
+    import { researchData } from './src/data/research.js';
+    import { initialDashboardData } from './src/data/dashboard.js';
+    import { skillCategories } from './src/data/skills.js';
+
+    let currentRoute = 'home';
+    let currentSlug = null;
+    let uNetNode = 2; // Default NIRP Bottleneck
+    let taskFilter = 'ALL';
+
+    window.navigate = function(route, slug = null) {
+      currentRoute = route;
+      currentSlug = slug;
+      window.scrollTo(0, 0);
+      updateNavHighlight();
+      render();
+    };
+
+    function updateNavHighlight() {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.className = 'nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-zinc-400 hover:text-white';
+      });
+      const activeBtn = document.getElementById(`nav-${currentRoute}`);
+      if (activeBtn) {
+        activeBtn.className = 'nav-btn px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-cyan-400 bg-cyan-500/15 border border-cyan-500/30';
+      }
+    }
+
+    function render() {
+      const container = document.getElementById('app-container');
+      if (currentRoute === 'home') container.innerHTML = renderHome();
+      else if (currentRoute === 'work') container.innerHTML = renderWork();
+      else if (currentRoute === 'work-detail') container.innerHTML = renderWorkDetail(currentSlug);
+      else if (currentRoute === 'research') container.innerHTML = renderResearch();
+      else if (currentRoute === 'dashboard') container.innerHTML = renderDashboard();
+      else if (currentRoute === 'about') container.innerHTML = renderAbout();
+      else if (currentRoute === 'resume') container.innerHTML = renderResume();
+      else if (currentRoute === 'contact') container.innerHTML = renderContact();
+      
+      lucide.createIcons();
+    }
+
+    // HOME VIEW
+    function renderHome() {
+      return `
+        <div class="space-y-16 pt-12 pb-16">
+          <!-- HERO -->
+          <section class="relative max-w-7xl mx-auto px-4 sm:px-8 pt-16 pb-12 bg-grid-pattern">
+            <div class="max-w-4xl space-y-6">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="px-3 py-1 text-xs font-mono font-medium rounded-full bg-cyan-950/60 text-cyan-400 border border-cyan-800/60">
+                  AI Engineer & Medical CV Researcher
+                </span>
+                <span class="text-xs font-mono text-zinc-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
+                  MSc Computer Engineering (Bahir Dar University)
+                </span>
+              </div>
+              
+              <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                Architecting <span class="cyan-gradient-text">Neuro-Inspired AI</span> & High-Performance Systems
+              </h1>
+              
+              <p class="text-lg text-zinc-300 max-w-3xl leading-relaxed">
+                I am <strong class="text-white font-semibold">Kibret Mulugeta</strong>. I bridge theoretical deep learning, medical image segmentation (U-Net & Brain MRI), and secure full-stack cloud microservices.
+              </p>
+
+              <div class="flex flex-wrap gap-4 pt-2">
+                <button onclick="navigate('work')" class="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-600 text-white text-sm font-semibold shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-indigo-500 transition-all flex items-center gap-2">
+                  <span>Explore Engineering Work</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+                <button onclick="navigate('research')" class="px-6 py-3 rounded-lg bg-transparent text-cyan-400 hover:bg-cyan-950/40 border border-cyan-500/40 text-sm font-semibold flex items-center gap-2">
+                  <i data-lucide="activity" class="w-4 h-4"></i>
+                  <span>Medical AI Research Portal</span>
+                </button>
+              </div>
+
+              <!-- Stats strip -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-zinc-800/80">
+                <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                  <span class="text-xl font-bold font-mono text-cyan-400 block">0.934</span>
+                  <span class="text-xs text-zinc-400">U-Net Brain MRI Dice Score</span>
+                </div>
+                <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                  <span class="text-xl font-bold font-mono text-indigo-400 block">OAuth2+JWT</span>
+                  <span class="text-xs text-zinc-400">FastAPI Security Engine</span>
+                </div>
+                <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                  <span class="text-xl font-bold font-mono text-emerald-400 block">18.4ms</span>
+                  <span class="text-xs text-zinc-400">Slice Inference Speed</span>
+                </div>
+                <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                  <span class="text-xl font-bold font-mono text-amber-400 block">MSc & BSc</span>
+                  <span class="text-xs text-zinc-400">Computer Engineering</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FEATURED PROJECTS -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+              <div>
+                <span class="text-xs font-mono uppercase font-bold text-cyan-400">Selected Engineering Work</span>
+                <h2 class="text-2xl font-bold text-white">Featured Systems & Research Projects</h2>
+              </div>
+              <button onclick="navigate('work')" class="text-xs font-mono text-cyan-400 hover:underline">View All 5 Projects →</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${projects.slice(0, 3).map(p => `
+                <div onclick="navigate('work-detail', '${p.slug}')" class="glass-panel p-6 rounded-xl border border-zinc-800 hover:border-cyan-500/40 cursor-pointer space-y-4 flex flex-col justify-between">
+                  <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-mono uppercase font-bold text-cyan-400">${p.category}</span>
+                      <span class="text-[10px] font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded border border-zinc-800">${p.status}</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white hover:text-cyan-400">${p.title}</h3>
+                    <p class="text-xs text-zinc-300 line-clamp-3">${p.summary}</p>
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                      ${p.stats.slice(0, 2).map(s => `
+                        <div class="bg-[#08090E] p-2 rounded border border-zinc-800 font-mono">
+                          <span class="text-[9px] text-zinc-400 uppercase block">${s.label}</span>
+                          <span class="text-xs font-bold text-cyan-400">${s.value}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                  <div class="pt-3 border-t border-zinc-800/80 text-xs font-mono font-semibold text-cyan-400">
+                    Read Case Study Report →
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- U-NET VISUALIZER HIGHLIGHT -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 space-y-6">
+            <div class="space-y-2">
+              <span class="text-xs font-mono uppercase font-bold text-indigo-400">Interactive Research Visualizer</span>
+              <h2 class="text-2xl font-bold text-white">Neuro-Inspired U-Net Segmentation Pipeline</h2>
+            </div>
+            ${renderUNetVisualizer()}
+          </section>
+
+          <!-- CAPABILITIES MATRIX -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-8 space-y-6">
+            <div class="space-y-2">
+              <span class="text-xs font-mono uppercase font-bold text-cyan-400">Technical Capabilities</span>
+              <h2 class="text-2xl font-bold text-white">Engineering & AI Competencies</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${skillCategories[0].skills.map(s => `
+                <div class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
+                      <i data-lucide="cpu" class="w-4 h-4"></i>
+                    </div>
+                    <span class="text-sm font-semibold text-white">${s.name}</span>
+                  </div>
+                  <span class="text-xs font-mono text-cyan-400 font-bold">${s.level}%</span>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // U-NET VISUALIZER COMPONENT
+    function renderUNetVisualizer() {
+      const nodes = [
+        { title: "Brain MRI Input", sub: "T1w / ATLAS Volume", details: "Applies N4 bias field correction, 3D Coiflet wavelet denoising, and Otsu skull-stripping." },
+        { title: "Contracting Encoders", sub: "Dilated Depthwise Convs", details: "4-stage residual encoder blocks reducing spatial dimension while extracting lesion semantics." },
+        { title: "NIRP Bottleneck", sub: "Neuro Plasticity Layer", details: "Primary Innovation: Dynamically adapts boundary loss based on regional spatial variance Hebbian rules." },
+        { title: "Expanding Decoders", sub: "Attention Gate Skips", details: "Upsampling blocks with skip connection attention routing to preserve anatomical boundaries." },
+        { title: "Lesion Mask Output", sub: "Stroke ROI (Dice: 0.934)", details: "Final binary segmentation mask demarcating stroke lesion ROI with 18.4ms slice latency." }
+      ];
+
+      return `
+        <div class="bg-[#0D0F17] p-6 sm:p-8 rounded-2xl border border-zinc-800 space-y-6">
+          <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+            <span class="text-xs font-mono font-bold text-cyan-400">Interactive Pipeline Node Switcher</span>
+            <span class="text-xs font-mono text-zinc-400">Active Node: Step 0${uNetNode + 1}</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+            ${nodes.map((n, i) => `
+              <button onclick="setUNetNode(${i})" class="p-3.5 rounded-xl border text-left transition-all ${
+                uNetNode === i ? 'bg-indigo-950/80 border-indigo-500 text-white shadow-lg shadow-indigo-500/20' : 'bg-zinc-900/50 border-zinc-800 text-zinc-400 hover:border-zinc-700'
+              }">
+                <span class="text-[10px] font-mono text-zinc-500 block">Step 0${i + 1}</span>
+                <span class="text-xs font-bold block truncate mt-0.5">${n.title}</span>
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="p-5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-2">
+            <h4 class="text-base font-bold text-white flex items-center gap-2">
+              <i data-lucide="zap" class="w-4 h-4 text-indigo-400"></i>
+              <span>${nodes[uNetNode].title}</span>
+            </h4>
+            <p class="text-xs text-indigo-300 font-mono">${nodes[uNetNode].sub}</p>
+            <p class="text-sm text-zinc-300 leading-relaxed pt-1">${nodes[uNetNode].details}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    window.setUNetNode = function(idx) {
+      uNetNode = idx;
+      render();
+    };
+
+    // WORK DIRECTORY VIEW
+    function renderWork() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-16 space-y-8">
+          <div class="space-y-3">
+            <span class="px-3 py-1 text-xs font-mono text-cyan-400 bg-cyan-950/60 rounded-full border border-cyan-800/60">Engineering Catalog</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white">Portfolio & Systems Work</h1>
+            <p class="text-zinc-300 text-base max-w-3xl leading-relaxed">
+              A comprehensive directory of 5 real engineering projects spanning medical computer vision, novel neural plasticity optimization, and enterprise full-stack OAuth 2.0 / JWT security platforms.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${projects.map(p => `
+              <div onclick="navigate('work-detail', '${p.slug}')" class="glass-panel p-6 rounded-xl border border-zinc-800 hover:border-cyan-500/40 cursor-pointer space-y-4 flex flex-col justify-between">
+                <div class="space-y-3">
+                  <span class="text-[10px] font-mono font-bold uppercase text-cyan-400 block">${p.category}</span>
+                  <h3 class="text-xl font-bold text-white hover:text-cyan-400">${p.title}</h3>
+                  <p class="text-xs text-zinc-300 line-clamp-3">${p.summary}</p>
+                  
+                  <div class="grid grid-cols-2 gap-2 pt-2">
+                    ${p.stats.slice(0, 2).map(s => `
+                      <div class="bg-[#08090E] p-2 rounded border border-zinc-800 font-mono">
+                        <span class="text-[9px] text-zinc-400 uppercase block">${s.label}</span>
+                        <span class="text-xs font-bold text-cyan-400">${s.value}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+
+                  <div class="flex flex-wrap gap-1 pt-2">
+                    ${p.tags.slice(0, 4).map(t => `<span class="text-[10px] font-mono px-2 py-0.5 bg-zinc-900 text-zinc-400 rounded border border-zinc-800">${t}</span>`).join('')}
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t border-zinc-800/80 text-xs font-mono font-semibold text-cyan-400">
+                  Read Case Study Report →
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // WORK DETAIL (CASE STUDY) VIEW
+    function renderWorkDetail(slug) {
+      const project = projects.find(p => p.slug === slug) || projects[0];
+      const isOAuth = project.slug === 'fullstack-workflow-management-oauth2-jwt';
+
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-8 py-16 space-y-10">
+          <button onclick="navigate('work')" class="text-xs font-mono text-cyan-400 hover:underline flex items-center gap-1">
+            ← Back to Engineering Directory
+          </button>
+
+          <div class="space-y-4 border-b border-zinc-800 pb-8">
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/60">${project.category}</span>
+              <span class="text-xs font-mono text-zinc-400 bg-zinc-900 px-3 py-1 rounded border border-zinc-800">${project.status}</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white">${project.title}</h1>
+            <p class="text-lg text-zinc-300 leading-relaxed">${project.overview}</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+              ${project.stats.map(s => `
+                <div class="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 font-mono">
+                  <span class="text-[10px] text-zinc-400 uppercase block">${s.label}</span>
+                  <span class="text-base font-bold text-cyan-400">${s.value}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          ${isOAuth ? renderOAuthVisualizer() : ''}
+
+          <div class="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 space-y-2">
+            <h3 class="text-base font-bold text-white font-mono">Problem Statement & Context</h3>
+            <p class="text-sm text-zinc-300 leading-relaxed">${project.problemStatement}</p>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-xl font-bold text-white">Architecture & System Design</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${Object.entries(project.architectureDetails).map(([k, v]) => `
+                <div class="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-1">
+                  <span class="text-xs font-mono text-cyan-400 font-bold uppercase block">${k}</span>
+                  <p class="text-xs text-zinc-300 leading-relaxed">${v}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-xl font-bold text-white">Source Code Data</h3>
+            ${project.codeSnippets.map(sn => `
+              <div class="rounded-xl bg-[#08090E] border border-zinc-800 font-mono text-xs overflow-hidden">
+                <div class="px-4 py-2 bg-zinc-900 border-b border-zinc-800 text-cyan-400 font-bold">${sn.filename}</div>
+                <pre class="p-4 text-zinc-200 overflow-x-auto leading-relaxed">${sn.code}</pre>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // MODULE A OAUTH VISUALIZER
+    function renderOAuthVisualizer() {
+      const steps = [
+        { title: "Client Login Initiation", detail: "Redirects user to provider login endpoint (/auth/google/login or /auth/github/login) with scope and state nonces." },
+        { title: "Callback Code Exchange", detail: "Backend receives authorization code callback and exchanges it for provider access tokens and verified profile claims." },
+        { title: "Account Resolution", detail: "Backend resolves or provisions system user in MongoDB Atlas / SQL database with tenant system roles." },
+        { title: "Custom Signed JWT Mints", detail: "Backend signs custom JWT token (HS256) containing claims (sub, email, role, exp)." },
+        { title: "HttpOnly Session Delivery", detail: "Token transmitted via HttpOnly, SameSite=Strict cookies protecting against script token theft." }
+      ];
+
+      return `
+        <div class="bg-[#0D0F17] p-6 rounded-2xl border border-zinc-800 space-y-4">
+          <span class="text-xs font-mono uppercase font-bold text-indigo-400">Module A: OAuth 2.0 + Signed JWT Sequence</span>
+          <div class="space-y-2">
+            ${steps.map((s, i) => `
+              <div class="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-start gap-3">
+                <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">0${i + 1}</span>
+                <div>
+                  <h4 class="text-sm font-bold text-white">${s.title}</h4>
+                  <p class="text-xs text-zinc-300 mt-0.5 leading-relaxed">${s.detail}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // STREAMLINED OWNER DASHBOARD (KIBRET'S PERSONAL COMMAND CENTER)
+    function renderDashboard() {
+      const d = initialDashboardData;
+      return `
+        <div class="max-w-6xl mx-auto px-4 sm:px-8 py-12 space-y-8">
+          
+          <!-- Sleek Owner Admin Header -->
+          <div class="glass-panel p-6 rounded-2xl border border-cyan-500/40 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 text-[10px] font-mono uppercase font-bold bg-cyan-950 text-cyan-400 border border-cyan-800 rounded">
+                  Kibret's Command Center • Owner Access
+                </span>
+                <span class="text-xs font-mono text-emerald-400 flex items-center gap-1">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span> Live Admin Session
+                </span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Kibret's Personal Telemetry & Control Hub</h1>
+              <p class="text-xs text-zinc-400">Streamlined owner monitoring for Neuro-U-Net-v2 model inference, security logs, and task queues.</p>
+            </div>
+
+            <div class="flex items-center gap-3 shrink-0">
+              <a href="mailto:kibretmail@gmail.com" class="px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-xs font-mono text-cyan-400 border border-zinc-700 flex items-center gap-2">
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                <span>kibretmail@gmail.com</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Clean 4-Metric Summary Cards -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="glass-panel p-4 rounded-xl border border-zinc-800 space-y-1">
+              <span class="text-[10px] font-mono text-zinc-400 uppercase block">Total System Requests</span>
+              <span class="text-2xl font-bold font-mono text-white">${d.kpis.totalRequests.toLocaleString()}</span>
+              <span class="text-[10px] font-mono text-emerald-400 block">+12.4% Avg Latency: ${d.kpis.avgLatencyMs}ms</span>
+            </div>
+
+            <div class="glass-panel p-4 rounded-xl border border-zinc-800 space-y-1">
+              <span class="text-[10px] font-mono text-zinc-400 uppercase block">AI Model Status</span>
+              <span class="text-lg font-bold font-mono text-cyan-400 block truncate">${d.modelTelemetry.modelName}</span>
+              <span class="text-[10px] font-mono text-emerald-400 block">ONLINE (18.4ms / slice)</span>
+            </div>
+
+            <div class="glass-panel p-4 rounded-xl border border-zinc-800 space-y-1">
+              <span class="text-[10px] font-mono text-zinc-400 uppercase block">Security & Auth Engine</span>
+              <span class="text-lg font-bold font-mono text-indigo-400 block">OAuth 2.0 + JWT</span>
+              <span class="text-[10px] font-mono text-zinc-400 block">${d.kpis.activeJwtSessions} Active Sessions</span>
+            </div>
+
+            <div class="glass-panel p-4 rounded-xl border border-zinc-800 space-y-1">
+              <span class="text-[10px] font-mono text-zinc-400 uppercase block">System Uptime</span>
+              <span class="text-2xl font-bold font-mono text-emerald-400">99.96%</span>
+              <span class="text-[10px] font-mono text-zinc-400 block">Error Rate: ${d.kpis.errorRatePercent}%</span>
+            </div>
+          </div>
+
+          <!-- Two Column Admin Panel: AI Telemetry & Security Logs -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Panel A: AI Model Telemetry Gauges -->
+            <div class="glass-panel p-6 rounded-2xl border border-zinc-800 space-y-4">
+              <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <span class="text-xs font-mono uppercase font-bold text-cyan-400">Neuro-U-Net-v2 Performance Telemetry</span>
+                <span class="text-[10px] font-mono text-zinc-400">ATLAS v2.0 MRI</span>
+              </div>
+
+              <div class="space-y-3 font-mono text-xs">
+                <div>
+                  <div class="flex justify-between text-zinc-300 pb-1">
+                    <span>Dice Similarity Coefficient (DSC)</span>
+                    <span class="text-cyan-400 font-bold">93.4% (0.934)</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full" style="width: 93.4%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-zinc-300 pb-1">
+                    <span>IoU Boundary Coefficient</span>
+                    <span class="text-indigo-400 font-bold">88.7% (0.887)</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+                    <div class="h-full bg-indigo-500 rounded-full" style="width: 88.7%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-zinc-300 pb-1">
+                    <span>VRAM Allocation (${d.modelTelemetry.vramAllocatedGB} GB / 16.0 GB)</span>
+                    <span class="text-emerald-400 font-bold">26% Reserved</span>
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+                    <div class="h-full bg-emerald-500 rounded-full" style="width: 26%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-zinc-800/80 text-[11px] font-mono text-zinc-400 space-y-1">
+                <p>✓ Skull Stripping: <strong class="text-zinc-200">PASS (N4-Otsu)</strong></p>
+                <p>✓ Wavelet Denoising: <strong class="text-zinc-200">PASS (3D Coiflet)</strong></p>
+              </div>
+            </div>
+
+            <!-- Panel B: Security Logs Stream -->
+            <div class="glass-panel p-6 rounded-2xl border border-zinc-800 space-y-4">
+              <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <span class="text-xs font-mono uppercase font-bold text-indigo-400">Security & Authorization Feed</span>
+                <span class="text-[10px] font-mono text-emerald-400">HS256 Verified</span>
+              </div>
+
+              <div class="space-y-2.5 font-mono text-xs">
+                ${d.securityLogs.map(l => `
+                  <div class="p-3 rounded-lg bg-[#08090E] border border-zinc-800/80 flex items-center justify-between">
+                    <div>
+                      <span class="font-bold text-white">${l.provider}</span>
+                      <span class="text-[11px] text-zinc-400 block">${l.email}</span>
+                    </div>
+                    <div class="text-right">
+                      <span class="text-emerald-400 font-bold text-[10px] block">${l.status}</span>
+                      <span class="text-[9px] text-zinc-500">${l.action}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Panel C: Personal Task & Job Dispatch Queue -->
+          <div class="glass-panel p-6 rounded-2xl border border-zinc-800 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
+              <span class="text-xs font-mono uppercase font-bold text-amber-400">System Task & Execution Queue</span>
+              <div class="flex gap-1 font-mono text-[10px]">
+                <button onclick="setTaskFilter('ALL')" class="px-2.5 py-1 rounded bg-zinc-800 text-white">ALL TASKS</button>
+                <button onclick="setTaskFilter('Processing')" class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-400 border border-cyan-800">PROCESSING</button>
+                <button onclick="setTaskFilter('Completed')" class="px-2.5 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">COMPLETED</button>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left font-mono text-xs">
+                <thead>
+                  <tr class="bg-zinc-900 text-zinc-400 border-b border-zinc-800">
+                    <th class="p-3">Job Name</th>
+                    <th class="p-3">Category</th>
+                    <th class="p-3">Status</th>
+                    <th class="p-3">Priority</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-800/60">
+                  ${d.taskQueue.filter(t => taskFilter === 'ALL' || t.status === taskFilter).map(t => `
+                    <tr class="hover:bg-zinc-900/40">
+                      <td class="p-3">
+                        <span class="font-bold text-white block">${t.name}</span>
+                        <span class="text-[10px] text-zinc-500">${t.id}</span>
+                      </td>
+                      <td class="p-3 text-cyan-400">${t.type}</td>
+                      <td class="p-3">
+                        <span class="${t.status === 'Completed' ? 'text-emerald-400' : 'text-amber-400'} font-semibold block">${t.status} (${t.progress}%)</span>
+                        <div class="w-20 h-1 bg-zinc-800 rounded-full mt-1 overflow-hidden">
+                          <div class="h-full bg-cyan-400 rounded-full" style="width: ${t.progress}%"></div>
+                        </div>
+                      </td>
+                      <td class="p-3 text-amber-400 font-bold">${t.priority}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    window.setTaskFilter = function(f) {
+      taskFilter = f;
+      render();
+    };
+
+    // RESEARCH PORTAL VIEW
+    function renderResearch() {
+      const r = researchData.primaryResearch;
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-16 space-y-10">
+          <div class="space-y-3">
+            <span class="px-3 py-1 text-xs font-mono text-indigo-400 bg-indigo-950/60 rounded-full border border-indigo-800/60">Medical Vision Hub</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white">Medical AI Research Portal</h1>
+          </div>
+
+          <div class="bg-[#0D0F17] p-8 rounded-2xl border border-zinc-800 space-y-6">
+            <div class="flex justify-between items-start">
+              <h2 class="text-2xl font-bold text-white max-w-2xl">${r.title}</h2>
+              <span class="text-xs font-mono text-cyan-400 bg-cyan-950 px-3 py-1.5 rounded border border-cyan-800">${r.status}</span>
+            </div>
+            <p class="text-sm text-zinc-300 leading-relaxed bg-[#08090E] p-4 rounded-xl border border-zinc-800">${r.abstract}</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
+              ${r.keyMetrics.map(m => `
+                <div class="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800">
+                  <span class="text-[9px] text-zinc-400 block uppercase">${m.label}</span>
+                  <span class="text-xl font-bold text-cyan-400">${m.value}</span>
+                  <span class="text-[9px] text-zinc-500 block">vs ${m.baseline} base</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          ${renderUNetVisualizer()}
+        </div>
+      `;
+    }
+
+    // ABOUT VIEW
+    function renderAbout() {
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-8 py-16 space-y-10">
+          <div class="space-y-3">
+            <span class="px-3 py-1 text-xs font-mono text-cyan-400 bg-cyan-950/60 rounded-full border border-cyan-800/60">Academic & Background</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white">About Kibret Mulugeta</h1>
+          </div>
+
+          <div class="space-y-4">
+            ${profile.bio.map(b => `<p class="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 text-sm text-zinc-300 leading-relaxed">${b}</p>`).join('')}
+          </div>
+
+          <div class="space-y-4">
+            <h2 class="text-2xl font-bold text-white">Academic Qualifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${profile.education.map(e => `
+                <div class="p-6 rounded-2xl bg-zinc-900/80 border border-zinc-800 space-y-2">
+                  <span class="text-xs font-mono text-cyan-400 font-bold">${e.degree}</span>
+                  <h3 class="text-xl font-bold text-white">${e.institution}</h3>
+                  <p class="text-xs text-zinc-400">${e.specialization}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // RESUME VIEW
+    function renderResume() {
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-8 py-16 space-y-10">
+          <div class="space-y-3">
+            <span class="px-3 py-1 text-xs font-mono text-cyan-400 bg-cyan-950/60 rounded-full border border-cyan-800/60">Interactive CV</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white">Curriculum Vitae</h1>
+          </div>
+
+          <div class="p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 space-y-3">
+            <h3 class="text-lg font-bold text-white">Executive Summary</h3>
+            <p class="text-sm text-zinc-300 leading-relaxed">
+              AI Engineer & Computer Engineer specializing in Deep Learning, Medical Image Segmentation (U-Net Brain MRI), and FastAPI OAuth 2.0 / JWT cloud microservices.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    // CONTACT VIEW
+    function renderContact() {
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-8 py-16 space-y-10">
+          <div class="space-y-3">
+            <span class="px-3 py-1 text-xs font-mono text-cyan-400 bg-cyan-950/60 rounded-full border border-cyan-800/60">Direct Portal</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white">Get In Touch</h1>
+          </div>
+
+          <div class="glass-panel p-8 rounded-2xl border border-zinc-800 space-y-4 max-w-xl">
+            <p class="text-sm text-zinc-300">Direct Email: <a href="mailto:kibretmail@gmail.com" class="text-cyan-400 font-bold underline">kibretmail@gmail.com</a></p>
+            <p class="text-xs text-zinc-400">Bahir Dar University & Debre Berhan University Graduate.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize App
+    render();
+  </script>
+</body>
+</html>
